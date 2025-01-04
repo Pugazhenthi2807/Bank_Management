@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Transfer History</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5">
+      <div class="text-center mb-4">
+        <h1 class="text-primary">Transfer History</h1>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>Account</th>
+              <th>Transfer Amount</th>
+              <th>Status</th>
+              <th>Balance</th>
+              <th>Date and Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for transfer in transfers %}
+            <!-- Row for the sender -->
+            <tr>
+              <td>{{ transfer.from_account }}</td>
+              <td class="text-danger">-{{ transfer.amount_from }}</td>
+              <td>{{ transfer.from_status }}</td>
+              <td>{{ transfer.from_account.balance }}</td>
+              <td>{{ transfer.datetime }}</td>
+            </tr>
+            <!-- Row for the recipient -->
+            <tr>
+              <td>{{ transfer.to_account }}</td>
+              <td class="text-success">{{ transfer.amount_to }}</td>
+              <td>{{ transfer.to_status }}</td>
+              <td>{{ transfer.to_account.balance }}</td>
+              <td>{{ transfer.datetime }}</td>
+            </tr>
+            {% empty %}
+            <!-- Message when no transfer records are found -->
+            <tr>
+              <td colspan="5" class="text-center">
+                No transfer records found.
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="{% url 'account_list' %}" class="btn btn-secondary"
+          >Back to Accounts</a
+        >
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
