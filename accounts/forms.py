@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ['ac_name', 'ac_no', 'ac_mobile', 'email', 'account_type', 'balance']
+        fields = ['ac_name',  'ac_mobile', 'email', 'account_type', 'balance']
         widgets={
             'ac_name':forms.TextInput(attrs={'class':'form-control'}),
             'ac_no':forms.TextInput(attrs={'class':'form-control'}),
